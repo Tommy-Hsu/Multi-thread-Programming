@@ -1,5 +1,5 @@
-#include <iostream>
-using namespace std;
+#include <stdio.h>
+#include <stdlib.h>
 
 int main( int argc, char* argv[] ) {
     
@@ -7,7 +7,7 @@ int main( int argc, char* argv[] ) {
     long long int   nTosses;
 
     if ( argc != 3 ) {
-        cout << "Usage: ./pi <nThreads> <nTosses>" << endl;
+        printf( "Usage: ./pi <nThreads> <nTosses>\n" );
         return 1;
     }
     else {
@@ -15,12 +15,12 @@ int main( int argc, char* argv[] ) {
         nTosses = atoll( argv[2] );
 
         if ( nThreads <= 0 || nTosses <= 0 ) {
-            cout << "Usage: ./pi <nThreads> <nTosses>" << endl;
+            printf( "nThreads and nTosses must be positive integers.\n");
             return 1;
         }
 
-        cout << "nThreads: " << nThreads << endl;
-        cout << "nTosses: " << nTosses << endl;
+        printf( "nThreads = %d\n", nThreads );
+        printf( "nTosses = %lld\n", nTosses );
     }
 
     return 0;
