@@ -36,8 +36,24 @@ void workerThreadStart(WorkerArgs *const args)
     // half of the image and thread 1 could compute the bottom half.
     // Of course, you can copy mandelbrotSerial() to this file and 
     // modify it to pursue a better performance.
+    
+    double startTime = CycleTimer::currentSeconds();   
+    // printf("Hello world from thread %d\n", args->threadId);
 
-    printf("Hello world from thread %d\n", args->threadId);
+    int startRow = args->threadId;
+    int totalRows = 1;
+
+    for (unsigned int i = 0; i < args->height; i+=args->numThreads){
+        mandelbrotSerial(
+            args->x0, args->y0, args->x1, args->y1,
+            args->width, args->height,
+            startRow + i, totalRows,
+            args->maxIterations,
+            args->output);
+    }
+
+    double endTime = CycleTimer::currentSeconds();
+    printf("Thread %d time: %.3f ms\n", args->threadId, (endTime - startTime) * 1000);
 }
 
 //
